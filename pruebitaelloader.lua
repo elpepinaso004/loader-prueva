@@ -1,12 +1,12 @@
--- Pepinasoi Loader - Versión Premium Green Style
+-- Pepinaso Loader - Versión Premium Green Style con scripts personalizados y paginación cada 4 botones
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- Limpiar versiones anteriores si existen
-if playerGui:FindFirstChild("PepinasoiLoaderGui") then
-    playerGui.PepinasoiLoaderGui:Destroy()
+if playerGui:FindFirstChild("PepinasoLoaderGui") then
+    playerGui.PepinasoLoaderGui:Destroy()
 end
 
 local screenGui = Instance.new("ScreenGui")
@@ -78,7 +78,7 @@ contentFrame.Parent = navFrame
 
 -- Paginación y Variables
 local allButtons = {}
-local scriptsPerPage = 5
+local scriptsPerPage = 4 -- Cambia de página cada 4 botones
 local currentPage = 1
 
 -- Botones de Navegación Inferiores
@@ -109,6 +109,29 @@ pageLabel.Text = "1/1"
 pageLabel.Font = Enum.Font.GothamBold
 pageLabel.TextSize = 16
 pageLabel.Parent = contentFrame
+
+-- Función para mostrar notificación temporal
+local function ShowNotification(text)
+    local notif = Instance.new("TextLabel")
+    notif.Size = UDim2.new(0, 200, 0, 40)
+    notif.Position = UDim2.new(0.5, -100, 0, 10)
+    notif.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+    notif.TextColor3 = Color3.new(1,1,1)
+    notif.Font = Enum.Font.GothamBold
+    notif.TextSize = 18
+    notif.Text = text
+    notif.BackgroundTransparency = 0.2
+    notif.Parent = navFrame
+    notif.ZIndex = 10
+    local tweenIn = game:GetService("TweenService"):Create(notif, TweenInfo.new(0.3), {BackgroundTransparency = 0})
+    local tweenOut = game:GetService("TweenService"):Create(notif, TweenInfo.new(0.3), {BackgroundTransparency = 1})
+    tweenIn:Play()
+    tweenIn.Completed:Wait()
+    task.wait(1.5)
+    tweenOut:Play()
+    tweenOut.Completed:Wait()
+    notif:Destroy()
+end
 
 -- Función para actualizar la vista
 local function UpdatePage()
@@ -157,9 +180,7 @@ local function AddScript(name, callback)
     end)
 
     btn.MouseButton1Click:Connect(function()
-        btn.Text = "¡EJECUTADO!"
-        task.wait(0.5)
-        btn.Text = name
+        ShowNotification("oh yeah el script se ejecuto osi osi")
         callback()
     end)
 
@@ -217,7 +238,8 @@ minimizeButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Añade aquí tus scripts con nombre y función
+-- Scripts a añadir (SpeedHub y Infinite Yield se mantienen, los demás se reemplazan)
+
 AddScript("SpeedHub X", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua"))()
 end)
@@ -226,28 +248,36 @@ AddScript("Infinite Yield (Admin)", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end)
 
-AddScript("God Mode", function()
-    print("Activando God Mode...")
+AddScript("Clover (roba un huevo)", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ryuun0x/Clover/refs/heads/main/main.lua"))()
 end)
 
-AddScript("Fly Script", function()
-    print("Activando Vuelo...")
+AddScript("Rivals", function()
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/8a30cd5907985a2b8d68c8010312f185.lua"))()
 end)
 
-AddScript("Noclip", function()
-    print("Noclip Activado")
+AddScript("Muscle Legends", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Young0xHUB/Young0x-HUB/refs/heads/main/loader.lua"))()
 end)
 
-AddScript("ESP Players", function()
-    print("ESP Cargado")
+AddScript("99 Noches", function()
+    loadstring(game:HttpGet("https://files.vapevoidware.xyz/VapeVoidware/VW-Add/main/loader.lua", true))()
 end)
 
-AddScript("Teleport Tools", function()
-    print("TP Tools")
+AddScript("Brookhaven", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Dark-Hub-214104"))()
 end)
 
-AddScript("Auto-Farm", function()
-    print("Farm iniciado")
+AddScript("Anti AFK", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn"))()
+end)
+
+AddScript("Ninja Legends", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MADMONEYDISTRO/feather-hub/refs/heads/main/feather%20hub%20ninja%20legends"))()
+end)
+
+AddScript("Duelos", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/imshrak/knifeduels/refs/heads/main/menu"))()
 end)
 
 -- Inicializar primera vista
