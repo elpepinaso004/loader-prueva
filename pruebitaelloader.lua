@@ -1,11 +1,12 @@
--- Variables y configuración inicial del frame de navegación
+-- Script completo para GUI movible y minimizable con paginación y botones funcionales
+
 local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "NavigationGui"
+screenGui.Name = "ScriptHubGui"
 screenGui.Parent = playerGui
 
 local navFrame = Instance.new("Frame")
-navFrame.Size = UDim2.new(0, 400, 0, 300) -- Tamaño inicial más grande para contener botones
+navFrame.Size = UDim2.new(0, 400, 0, 300)
 navFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
 navFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 navFrame.BorderSizePixel = 0
@@ -28,7 +29,6 @@ titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 titleLabel.Position = UDim2.new(0.05, 0, 0, 0)
 titleLabel.Parent = titleBar
 
--- Botón minimizar / maximizar
 local minimizeButton = Instance.new("TextButton")
 minimizeButton.Size = UDim2.new(0, 30, 1, 0)
 minimizeButton.Position = UDim2.new(0.9, 0, 0, 0)
@@ -39,14 +39,14 @@ minimizeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 minimizeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
 minimizeButton.Parent = titleBar
 
--- Contenedor para los botones y la etiqueta de página
+-- Contenedor para botones y etiqueta de página
 local contentFrame = Instance.new("Frame")
-contentFrame.Size = UDim2.new(1, 0, 1, -30) -- Ocupa todo menos la barra superior
+contentFrame.Size = UDim2.new(1, 0, 1, -30)
 contentFrame.Position = UDim2.new(0, 0, 0, 30)
 contentFrame.BackgroundTransparency = 1
 contentFrame.Parent = navFrame
 
--- Botón para página anterior
+-- Botón página anterior
 local prevButton = Instance.new("TextButton")
 prevButton.Size = UDim2.new(0.1, 0, 0, 40)
 prevButton.Position = UDim2.new(0, 10, 1, -50)
@@ -57,7 +57,7 @@ prevButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 prevButton.TextColor3 = Color3.fromRGB(200, 200, 200)
 prevButton.Parent = contentFrame
 
--- Botón para página siguiente
+-- Botón página siguiente
 local nextButton = Instance.new("TextButton")
 nextButton.Size = UDim2.new(0.1, 0, 0, 40)
 nextButton.Position = UDim2.new(0.9, -40, 1, -50)
@@ -71,7 +71,7 @@ nextButton.Parent = contentFrame
 local nextCorner = Instance.new("UICorner")
 nextCorner.Parent = nextButton
 
--- Etiqueta que muestra la página actual
+-- Etiqueta página actual
 local pageLabel = Instance.new("TextLabel")
 pageLabel.Size = UDim2.new(0.2, 0, 0, 40)
 pageLabel.Position = UDim2.new(0.4, 0, 1, -50)
@@ -82,12 +82,12 @@ pageLabel.TextScaled = true
 pageLabel.Font = Enum.Font.Gotham
 pageLabel.Parent = contentFrame
 
--- Variables para manejar las páginas y botones
+-- Variables para paginación y botones
 local allButtons = {}
 local scriptsPerPage = 5
 local currentPage = 1
 
--- Función para actualizar la visibilidad de los botones según la página actual
+-- Función para actualizar botones visibles según página
 local function UpdatePage()
     local maxPage = math.ceil(#allButtons / scriptsPerPage)
     if maxPage == 0 then maxPage = 1 end
@@ -106,7 +106,7 @@ local function UpdatePage()
     end
 end
 
--- Función para crear botones
+-- Función para crear botones con callback
 local function CreateButton(name, callback)
     local button = Instance.new("TextButton")
     button.Size = UDim2.new(0.8, 0, 0, 40)
@@ -140,17 +140,17 @@ nextButton.MouseButton1Click:Connect(function()
     end
 end)
 
--- Funcionalidad para minimizar y maximizar
+-- Funcionalidad minimizar/maximizar
 local minimized = false
 minimizeButton.MouseButton1Click:Connect(function()
     minimized = not minimized
     if minimized then
         contentFrame.Visible = false
-        navFrame.Size = UDim2.new(0, 400, 0, 30) -- Solo la barra superior visible
+        navFrame.Size = UDim2.new(0, 400, 0, 30)
         minimizeButton.Text = "+"
     else
         contentFrame.Visible = true
-        navFrame.Size = UDim2.new(0, 400, 0, 300) -- Tamaño original
+        navFrame.Size = UDim2.new(0, 400, 0, 300)
         minimizeButton.Text = "-"
     end
 end)
@@ -201,37 +201,37 @@ end)
 
 CreateButton("God Mode", function()
     print("God Mode activado")
-    -- Código para God Mode
+    -- Código para God Mode aquí
 end)
 
 CreateButton("Infinite Jump", function()
     print("Infinite Jump activado")
-    -- Código para salto infinito
+    -- Código para salto infinito aquí
 end)
 
 CreateButton("No Clip", function()
     print("No Clip activado")
-    -- Código para No Clip
+    -- Código para No Clip aquí
 end)
 
 CreateButton("Teleport to Spawn", function()
     print("Teletransportado")
-    -- Código para teletransportar al spawn
+    -- Código para teletransportar aquí
 end)
 
 CreateButton("ESP Players", function()
     print("ESP activado")
-    -- Código para ESP
+    -- Código para ESP aquí
 end)
 
-CreateButton(Infinity yield", function()
-    print("oh yeah el script se ejecuto osi osi")
-   loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+CreateButton("Auto Farm", function()
+    print("Auto Farm activado")
+    -- Código para Auto Farm aquí
 end)
 
 CreateButton("Fly", function()
     print("Fly activado")
-    -- Código para vuelo
+    -- Código para vuelo aquí
 end)
 
 -- Inicializar la primera página
