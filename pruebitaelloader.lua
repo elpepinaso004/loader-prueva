@@ -70,4 +70,3 @@ end)
 -- Inicializar
 UpdatePage()
 pageLabel.Text = "1/" .. math.ceil(#allButtons / scriptsPerPage)
-```
